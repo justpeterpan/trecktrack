@@ -1,41 +1,60 @@
 <script setup lang="ts">
 import { TripRequired } from '@/types/trip'
+import { Driver } from '@prisma/client'
 
 const router = useRouter()
-const formData: TripRequired = reactive({
-  driverId: 1,
-  description: '',
-  startLocation: '',
-  endLocation: '',
-  distance: 0,
-  duration: 0,
-  startTime: '',
-  endTime: '',
-  createdAt: new Date(Date.now()),
-})
+const selectOptions = ref({})
+const { data: drivers, pending: driversPending } = await useFetch<Driver[]>(
+  '/api/driver/all',
+  {
+    key: 'drivers',
+  }
+)
 
-function convertDateToISO(date: Date | string) {
-  return new Date(date).toISOString()
+function getDriversForSelect(drivers: Driver[] | null) {
+  if (!!drivers?.length) {
+    return drivers.reduce((acc: Record<number, string>, driver) => {
+      acc[driver.id] = driver.name
+      return acc
+    }, {})
+  }
+  return {}
+}
+function calculateDuration(startTime: Date, endTime: Date) {
+  return endTime.getTime() - startTime.getTime()
+}
+function calculateDistance(
+  startMileage: number | string,
+  endMileage: number | string
+) {
+  if (typeof startMileage === 'string') startMileage = parseFloat(startMileage)
+  if (typeof endMileage === 'string') endMileage = parseFloat(endMileage)
+  return endMileage - startMileage
 }
 
-function calculateDuration() {
-  const start = new Date(formData.startTime)
-  const end = new Date(formData.endTime)
-  const duration = end.getTime() - start.getTime()
-  formData.duration = duration
-}
+selectOptions.value = getDriversForSelect(drivers.value)
 
-async function createTrip(event: Event) {
-  event.preventDefault()
-  formData.startTime = convertDateToISO(formData.startTime)
-  formData.endTime = convertDateToISO(formData.endTime)
-  calculateDuration()
+async function createTrip(trip: TripRequired) {
+  const formattedTrip = {
+    ...trip,
+    driverId: +trip.driverId,
+    startTime: new Date(trip.startTime).toISOString(),
+    endTime: new Date(trip.endTime).toISOString(),
+    startMileage: +trip.startMileage,
+    endMileage: +trip.endMileage,
+    distance: calculateDistance(trip.startMileage, trip.endMileage),
+    duration: calculateDuration(
+      new Date(trip.startTime),
+      new Date(trip.endTime)
+    ),
+  }
+  console.log('formattedTrip', formattedTrip)
   const res = await useFetch('/api/trip', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(formattedTrip),
   })
   if (!res.data) {
     console.error('Error creating trip', res.error)
@@ -46,54 +65,75 @@ async function createTrip(event: Event) {
 
 <template>
   <div>
-    <form @submit="createTrip">
-      <h1>Create Driver</h1>
-      <input
-        autofocus
-        placeholder="Driver"
-        type="text"
-        v-model="formData.driverId"
+    <FormKit
+      type="form"
+      id="driver"
+      submit-label="Create Driver"
+      @submit="createTrip"
+    >
+      <FormKit
+        type="select"
+        label="Who was driving"
+        name="driverId"
+        :options="selectOptions"
       />
-      <input
-        autofocus
-        placeholder="Start"
+      <FormKit
         type="text"
-        v-model="formData.startLocation"
+        name="startLocation"
+        label="Start Location"
+        placeholder="Start Location"
+        help="Where did you start?"
+        validation="required"
       />
-      <input
-        autofocus
-        placeholder="End"
+      <FormKit
         type="text"
-        v-model="formData.endLocation"
+        name="endLocation"
+        label="End Location"
+        placeholder="End Location"
+        help="Where did you end?"
+        validation="required"
       />
-      <input
-        autofocus
-        placeholder="Start Time"
+      <FormKit
         type="datetime-local"
-        v-model="formData.startTime"
-      />
-      <input
-        autofocus
+        name="startTime"
+        label="Start Time"
         placeholder="Start Time"
-        type="datetime-local"
-        v-model="formData.endTime"
+        help="When did you start?"
+        validation="required"
       />
-      <input
-        autofocus
-        placeholder="Distance in km"
+      <FormKit
+        type="datetime-local"
+        name="endTime"
+        label="End Time"
+        placeholder="End Time"
+        help="When did you end?"
+        validation="required"
+      />
+      <FormKit
         type="number"
-        v-model="formData.distance"
+        name="startMileage"
+        label="Start Mileage"
+        placeholder="Start Mileage"
+        help="How many km did you start with?"
+        validation="required"
       />
-      <input
-        autofocus
+      <FormKit
+        type="number"
+        name="endMileage"
+        label="End Mileage"
+        placeholder="End Mileage"
+        help="How many km did you end with?"
+        validation="required"
+      />
+      <FormKit
+        type="textarea"
+        rows="4"
+        name="description"
+        label="Description"
         placeholder="Description"
-        type="text"
-        v-model="formData.description"
+        help="What happened?"
+        validation="required"
       />
-      <input type="submit" value="Create Trip" />
-    </form>
-    <pre>
-      {{ formData }}
-    </pre>
+    </FormKit>
   </div>
 </template>

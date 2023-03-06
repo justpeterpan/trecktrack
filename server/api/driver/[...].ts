@@ -5,7 +5,18 @@ const prisma = new PrismaClient()
 const driver = createRouter()
 
 driver.get(
-  '/:id',
+  '/all',
+  defineEventHandler(async () => {
+    const data = await prisma.driver.findMany({ include: { Trip: true } })
+    if (!data) {
+      throw new Error('No drivers found')
+    }
+    return data
+  })
+)
+
+driver.get(
+  '/id/:id',
   defineEventHandler(async (event) => {
     if (!event.context?.params?.id) {
       throw new Error('No driver id provided')
@@ -22,6 +33,18 @@ driver.get(
       throw new Error('No driver found')
     }
     return data
+  })
+)
+
+driver.post(
+  '/create',
+  defineEventHandler(async (event) => {
+    const { name } = await readBody(event)
+    return await prisma.driver.create({
+      data: {
+        name,
+      },
+    })
   })
 )
 

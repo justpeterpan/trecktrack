@@ -1,6 +1,10 @@
 <script setup lang="ts">
-const { data: drivers, pending: driversPending } = await useFetch(
-  '/api/drivers',
+import { Driver, Trip } from '@prisma/client'
+
+type Drivers = Driver & { Trip: Trip[] }
+
+const { data: drivers, pending: driversPending } = await useFetch<Drivers[]>(
+  '/api/driver/all',
   {
     key: 'drivers',
   }
@@ -8,9 +12,6 @@ const { data: drivers, pending: driversPending } = await useFetch(
 const { data: trips, pending: tripsPending } = await useFetch('/api/trips', {
   key: 'trips',
 })
-
-const { data } = await useFetch('/api/driver/1')
-console.log(data.value)
 </script>
 
 <template>
@@ -44,9 +45,7 @@ console.log(data.value)
           </li>
         </ul>
       </div>
-      <div v-else>No Drivers available</div>
+      <div v-else>No Trips available</div>
     </section>
-
-    <pre>{{ data }}</pre>
   </div>
 </template>

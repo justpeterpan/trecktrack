@@ -24,6 +24,8 @@ model Trip {
   endLocation   String
   startTime     DateTime
   endTime       DateTime
+  startMileage  Float
+  endMileage    Float
   distance      Float
   duration      Float
   description   String

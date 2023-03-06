@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import { Driver } from '@prisma/client'
+
 const router = useRouter()
 
-async function createDriver(data: string) {
-  const res = await useFetch('/api/driver', {
+async function createDriver(driver: Driver) {
+  const res = await useFetch('/api/driver/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(driver),
   })
   if (!res.data) {
     console.error('Error creating driver', res.error)
