@@ -8,6 +8,9 @@ const { data: drivers, pending: driversPending } = await useFetch(
 const { data: trips, pending: tripsPending } = await useFetch('/api/trips', {
   key: 'trips',
 })
+
+const { data } = await useFetch('/api/driver/1')
+console.log(data.value)
 </script>
 
 <template>
@@ -43,5 +46,7 @@ const { data: trips, pending: tripsPending } = await useFetch('/api/trips', {
       </div>
       <div v-else>No Drivers available</div>
     </section>
+
+    <pre>{{ data }}</pre>
   </div>
 </template>
