@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TripRequired } from '@/types/trip'
+import { TripRequired } from '~/types/trip'
 import { Driver } from '@prisma/client'
 
 const router = useRouter()

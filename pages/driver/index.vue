@@ -1,19 +1,11 @@
 <script setup lang="ts">
 import { Driver } from '@prisma/client'
 
+const { $trpc } = useNuxtApp()
 const router = useRouter()
 
 async function createDriver(driver: Driver) {
-  const res = await useFetch('/api/driver/create', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(driver),
-  })
-  if (!res.data) {
-    console.error('Error creating driver', res.error)
-  }
+  await $trpc.drivers.create.mutate({ name: driver.name })
   router.push('/')
 }
 </script>
