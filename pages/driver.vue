@@ -1,17 +1,13 @@
 <script setup lang="ts">
 const router = useRouter()
-const formData = reactive({
-  name: '',
-})
 
-async function createDriver(event: Event) {
-  event.preventDefault()
+async function createDriver(data: string) {
   const res = await useFetch('/api/driver', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(data),
   })
   if (!res.data) {
     console.error('Error creating driver', res.error)
@@ -22,10 +18,20 @@ async function createDriver(event: Event) {
 
 <template>
   <div>
-    <form @submit="createDriver">
-      <h1>Create Driver</h1>
-      <input autofocus placeholder="Name" type="text" v-model="formData.name" />
-      <input type="submit" value="Create User" />
-    </form>
+    <FormKit
+      type="form"
+      id="driver"
+      submit-label="Create Driver"
+      @submit="createDriver"
+    >
+      <FormKit
+        type="text"
+        name="name"
+        label="Your name"
+        placeholder="Jane Doe"
+        help="What do people call you?"
+        validation="required"
+      />
+    </FormKit>
   </div>
 </template>

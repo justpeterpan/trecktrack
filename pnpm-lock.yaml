@@ -1,11 +1,17 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@formkit/icons': 1.0.0-beta.15
+  '@formkit/nuxt': 1.0.0-beta.15
+  '@formkit/themes': 1.0.0-beta.15
   '@prisma/client': ^4.11.0
   nuxt: ^3.2.3
   prisma: ^4.11.0
 
 dependencies:
+  '@formkit/icons': 1.0.0-beta.15
+  '@formkit/nuxt': 1.0.0-beta.15
+  '@formkit/themes': 1.0.0-beta.15
   '@prisma/client': 4.11.0_prisma@4.11.0
 
 devDependencies:
@@ -1055,6 +1061,113 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@formkit/core/1.0.0-beta.15:
+    resolution: {integrity: sha512-BOqUUF8iF+H9fQMsQFqc753/LBeNkMixmS3tCMpo1kjUjPq/hSmj+f1V07CqQldmQa7y1NJGClWd2mYU3uQKRA==}
+    dependencies:
+      '@formkit/utils': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/dev/1.0.0-beta.15:
+    resolution: {integrity: sha512-9V30tFaZjYFJYsO3KDyvBIXzn32Qaa9kdR5jhnZn9TwOJ+UynLlyBgM0raH8lpz3xL0jdsRDtpFzabFROPlmoQ==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+      '@formkit/utils': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/i18n/1.0.0-beta.15:
+    resolution: {integrity: sha512-D9YGw6eGs1HgnpEmQWjc2ezVA8JMMs8Zcl34w+6Yujp/KaPFnrzArP0/Ick223HpZjho2+cni/WNNTfpK1/pgw==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+      '@formkit/utils': 1.0.0-beta.15
+      '@formkit/validation': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/icons/1.0.0-beta.15:
+    resolution: {integrity: sha512-BhnNS8PuGmivmZejisWW0ys9yZVgzspE4edKjb1zNuOoDOxfpZh/rpHgaZH0p5ZY/UMEc2EFtPQf53WtN1/WFg==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/inputs/1.0.0-beta.15:
+    resolution: {integrity: sha512-wGLfq87HXSwU4yzW0GNkP7I7Dsjlh8Mx5yaVP3waocBm3p4azrayUfLrtTSBktVhDDPzk4qFhmIO+oYlBz0LJQ==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/nuxt/1.0.0-beta.15:
+    resolution: {integrity: sha512-/kvKr+Em1lhMgWw/Ihmjznek4BEg0WjkTZuBEPPUCjMAxDEGpRFzigNMpw5c59Sn0vf/gtnr+BrKBGIq93Z5Ig==}
+    dependencies:
+      '@formkit/vue': 1.0.0-beta.15
+    transitivePeerDependencies:
+      - tailwindcss
+      - unocss
+      - vue
+      - windicss
+    dev: false
+
+  /@formkit/observer/1.0.0-beta.15:
+    resolution: {integrity: sha512-ZoAplwLG5XRfc5S2s+kIyykf6Mj/lX4ILwn5jrkQHaYMeUAkzUql6W1ClqinTVzumbJt6QUKjQkanBX7AEO40w==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+      '@formkit/utils': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/rules/1.0.0-beta.15:
+    resolution: {integrity: sha512-SS/oI8X7H+l5VlJcIl2YfSE26bPZgLDG6AEc1aWosB3ugeLUg+yucXonbro7yR/DUKchEzvZHKKZnQdTOguc9A==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+      '@formkit/utils': 1.0.0-beta.15
+      '@formkit/validation': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/themes/1.0.0-beta.15:
+    resolution: {integrity: sha512-bn1dYYVlPb6u2TEQsriXStfPgj+m7+4yKLWc2SbtmNpGqmkSCiIQjVIcHpcERHW0x0BcYzDOXnJ+vbo7SXJqyQ==}
+    peerDependencies:
+      tailwindcss: ^3.2.0
+      unocss: ^0.31.0
+      windicss: ^3.0.0
+    peerDependenciesMeta:
+      tailwindcss:
+        optional: true
+      unocss:
+        optional: true
+      windicss:
+        optional: true
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/utils/1.0.0-beta.15:
+    resolution: {integrity: sha512-YEtKhvQb2vnsvpYauLHB6G0NkP+13aHg/1SdOAYZV64FQOuPsHbhHSZKP8JiIPzDHXt8Vut+v+wUMXvYX3rTIQ==}
+    dev: false
+
+  /@formkit/validation/1.0.0-beta.15:
+    resolution: {integrity: sha512-qlOBBl9anwH3Yx9PD+sYYZY8L+vCz/Q4n17GLZp88BYeO+gD3VW0k9vVPGPXcdYkOZMcpJu87QNSZ2o1tSuRQw==}
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+      '@formkit/observer': 1.0.0-beta.15
+    dev: false
+
+  /@formkit/vue/1.0.0-beta.15:
+    resolution: {integrity: sha512-DxIn+3uYAivbs8fg7EAG7Oui0Cln2DFRcheswuOAiHrXRktVSJ3uDumDyIPUg9ACUAyLSVKHG62/HPpcl9JCsg==}
+    peerDependencies:
+      vue: ^3.2.1
+    dependencies:
+      '@formkit/core': 1.0.0-beta.15
+      '@formkit/dev': 1.0.0-beta.15
+      '@formkit/i18n': 1.0.0-beta.15
+      '@formkit/inputs': 1.0.0-beta.15
+      '@formkit/observer': 1.0.0-beta.15
+      '@formkit/rules': 1.0.0-beta.15
+      '@formkit/themes': 1.0.0-beta.15
+      '@formkit/utils': 1.0.0-beta.15
+      '@formkit/validation': 1.0.0-beta.15
+    transitivePeerDependencies:
+      - tailwindcss
+      - unocss
+      - windicss
+    dev: false
 
   /@ioredis/commands/1.2.0:
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
