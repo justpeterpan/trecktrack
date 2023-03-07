@@ -3,15 +3,11 @@ import { Driver, Trip } from '@prisma/client'
 
 type Drivers = Driver & { Trip: Trip[] }
 
-const { data: drivers, pending: driversPending } = await useFetch<Drivers[]>(
-  '/api/driver/all',
-  {
-    key: 'drivers',
-  }
-)
-const { data: trips, pending: tripsPending } = await useFetch('/api/trips', {
-  key: 'trips',
-})
+const { $trpc } = useNuxtApp()
+const { data: drivers, pending: driversPending } =
+  await $trpc.drivers.getAll.useQuery()
+const { data: trips, pending: tripsPending } =
+  await $trpc.trips.getAll.useQuery()
 </script>
 
 <template>

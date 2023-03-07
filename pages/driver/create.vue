@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { Driver } from '@prisma/client'
 
+definePageMeta({
+  title: 'Create Driver',
+  alias: '/driver',
+})
+
 const { $trpc } = useNuxtApp()
 const router = useRouter()
 

@@ -2,17 +2,15 @@
 import { TripRequired } from '~/types/trip'
 import { Driver } from '@prisma/client'
 
+const { $trpc } = useNuxtApp()
 const router = useRouter()
 const selectOptions = ref({})
-const { data: drivers, pending: driversPending } = await useFetch<Driver[]>(
-  '/api/driver/all',
-  {
-    key: 'drivers',
-  }
-)
+
+const { data: drivers, pending: driversPending } =
+  await $trpc.drivers.getAll.useQuery()
 
 function getDriversForSelect(drivers: Driver[] | null) {
-  if (!!drivers?.length) {
+  if (!!drivers?.length && !driversPending.value) {
     return drivers.reduce((acc: Record<number, string>, driver) => {
       acc[driver.id] = driver.name
       return acc
@@ -20,6 +18,8 @@ function getDriversForSelect(drivers: Driver[] | null) {
   }
   return {}
 }
+selectOptions.value = getDriversForSelect(drivers.value)
+
 function calculateDuration(startTime: Date, endTime: Date) {
   return endTime.getTime() - startTime.getTime()
 }
@@ -31,8 +31,6 @@ function calculateDistance(
   if (typeof endMileage === 'string') endMileage = parseFloat(endMileage)
   return endMileage - startMileage
 }
-
-selectOptions.value = getDriversForSelect(drivers.value)
 
 async function createTrip(trip: TripRequired) {
   const formattedTrip = {
@@ -48,17 +46,7 @@ async function createTrip(trip: TripRequired) {
       new Date(trip.endTime)
     ),
   }
-  console.log('formattedTrip', formattedTrip)
-  const res = await useFetch('/api/trip', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formattedTrip),
-  })
-  if (!res.data) {
-    console.error('Error creating trip', res.error)
-  }
+  await $trpc.trips.create.mutate(formattedTrip)
   router.push('/')
 }
 </script>

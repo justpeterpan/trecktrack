@@ -3,7 +3,7 @@ import { Driver, Trip } from '@prisma/client'
 
 const route = useRoute()
 const { data: driver, pending } = await useFetch<Driver & { Trip: Trip[] }>(
-  `/api/driver/${route.params.id}`
+  `/api/driver/id/${route.params.id}`
 )
 </script>
 <template>

@@ -35,4 +35,11 @@ export default router({
         },
       })
     }),
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.driver.findMany({
+      include: {
+        Trip: true,
+      },
+    })
+  }),
 })
