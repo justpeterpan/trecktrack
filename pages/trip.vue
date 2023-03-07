@@ -5,7 +5,6 @@ import { Driver } from '@prisma/client'
 const { $trpc } = useNuxtApp()
 const router = useRouter()
 const selectOptions = ref({})
-
 const { data: drivers, pending: driversPending } =
   await $trpc.drivers.getAll.useQuery()
 
@@ -20,9 +19,10 @@ function getDriversForSelect(drivers: Driver[] | null) {
 }
 selectOptions.value = getDriversForSelect(drivers.value)
 
-function calculateDuration(startTime: Date, endTime: Date) {
-  return endTime.getTime() - startTime.getTime()
+function calculateDuration(start: Date, end: Date) {
+  return end.getTime() - start.getTime()
 }
+
 function calculateDistance(
   startMileage: number | string,
   endMileage: number | string
