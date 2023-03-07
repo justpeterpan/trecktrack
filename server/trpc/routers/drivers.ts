@@ -42,4 +42,16 @@ export default router({
       },
     })
   }),
+  get: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      return await ctx.prisma.driver.findUnique({
+        where: {
+          id: input.id,
+        },
+        include: {
+          Trip: true,
+        },
+      })
+    }),
 })

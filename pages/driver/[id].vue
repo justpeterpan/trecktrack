@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Driver, Trip } from '@prisma/client'
-
+const { $trpc } = useNuxtApp()
 const route = useRoute()
-const { data: driver, pending } = await useFetch<Driver & { Trip: Trip[] }>(
-  `/api/driver/id/${route.params.id}`
-)
+const { data: driver, pending } = await $trpc.drivers.get.useQuery({
+  id: +route.params.id,
+})
 </script>
+
 <template>
   <div>
     <h1>Driver</h1>
