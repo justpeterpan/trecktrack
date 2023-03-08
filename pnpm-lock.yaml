@@ -1,9 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@formkit/icons': 1.0.0-beta.15
   '@formkit/nuxt': 1.0.0-beta.15
-  '@formkit/themes': 1.0.0-beta.15
   '@prisma/client': ^4.11.0
   '@trpc/client': ^10.14.0
   '@trpc/server': ^10.14.0
@@ -14,9 +12,7 @@ specifiers:
   zod: ^3.21.2
 
 dependencies:
-  '@formkit/icons': 1.0.0-beta.15
   '@formkit/nuxt': 1.0.0-beta.15
-  '@formkit/themes': 1.0.0-beta.15
   '@prisma/client': 4.11.0_prisma@4.11.0
   '@trpc/client': 10.14.0_@trpc+server@10.14.0
   '@trpc/server': 10.14.0
@@ -1091,12 +1087,6 @@ packages:
       '@formkit/core': 1.0.0-beta.15
       '@formkit/utils': 1.0.0-beta.15
       '@formkit/validation': 1.0.0-beta.15
-    dev: false
-
-  /@formkit/icons/1.0.0-beta.15:
-    resolution: {integrity: sha512-BhnNS8PuGmivmZejisWW0ys9yZVgzspE4edKjb1zNuOoDOxfpZh/rpHgaZH0p5ZY/UMEc2EFtPQf53WtN1/WFg==}
-    dependencies:
-      '@formkit/core': 1.0.0-beta.15
     dev: false
 
   /@formkit/inputs/1.0.0-beta.15:
