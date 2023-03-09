@@ -79,7 +79,7 @@ async function createTrip(trip: TripRequired) {
             label="End Mileage"
             placeholder="End Mileage"
             help="How many km did you end with?"
-            validation="required|number|min:startMileage"
+            validation="required|number"
             :validation-messages="{
               min: 'you can\'t drive backwards',
             }"
@@ -97,7 +97,7 @@ async function createTrip(trip: TripRequired) {
       <template #right>
         <img
           class="aspect-[3/2] w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
-          src="~/public/side.png"
+          src="/side.png"
           alt=""
         />
       </template>
