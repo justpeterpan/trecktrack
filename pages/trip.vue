@@ -24,7 +24,7 @@ async function createTrip(trip: TripRequired) {
         <FormKit
           type="form"
           id="driver"
-          submit-label="Create Driver"
+          submit-label="Track Trip"
           @submit="createTrip"
         >
           <FormKit
