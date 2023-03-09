@@ -1,5 +1,10 @@
+import { TheHeader } from './.nuxt/components'; import { TheHeader } from
+'./.nuxt/components';
+
 <template>
   <div>
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>

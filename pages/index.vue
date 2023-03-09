@@ -7,25 +7,16 @@ const { data: trips, pending: tripsPending } =
 
 <template>
   <div>
-    <h1>TrekTrack</h1>
-    <ul>
-      <li>
-        <NuxtLink to="/driver">drivers</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/trip">track trip</NuxtLink>
-      </li>
-    </ul>
-    <section>
-      <h2>Latest Trips</h2>
-      <div v-if="!tripsPending && trips?.length">
+    <Hero title="Dashboard" />
+    <Content title="Trips">
+      <template #left v-if="!tripsPending && trips?.length">
         <ul>
           <li v-for="trip in trips" :key="trip.id">
             {{ trip.startTime }} {{ trip.description }}
           </li>
         </ul>
-      </div>
-      <div v-else>No Trips available</div>
-    </section>
+      </template>
+      <template #left v-else> No trips yet </template>
+    </Content>
   </div>
 </template>

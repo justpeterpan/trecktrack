@@ -8,19 +8,16 @@ const { data: driver, pending } = await $trpc.drivers.get.useQuery({
 
 <template>
   <div>
-    <h1>Driver</h1>
-    <div v-if="!pending && driver">
-      <p>{{ driver.name }}</p>
-      <div v-if="!driver.Trip.length">No trips taken yet</div>
-
-      <template v-else>
-        <ul>
+    <Hero v-if="!pending && driver?.id" :title="driver?.name" />
+    <Content title="Latest Trips" v-if="!pending && driver?.id">
+      <template #left>
+        <ul v-if="driver.Trip.length" cl>
           <li v-for="trip in driver.Trip" :key="trip.id">
             {{ trip.startTime }} {{ trip.description }}
           </li>
         </ul>
+        <p v-else>no trips taken yet</p>
       </template>
-    </div>
-    <div v-else>Loading...</div>
+    </Content>
   </div>
 </template>
