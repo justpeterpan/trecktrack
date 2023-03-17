@@ -16,10 +16,22 @@ model Driver {
   Trip Trip[]
 }
 
+model Car {
+  id              Int      @id @default(autoincrement())
+  name            String
+  Trip            Trip[]
+  startingMileage Float
+  currentMileage  Float
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model Trip {
   id            Int      @id @default(autoincrement())
   driverId      Int
   driver        Driver   @relation(fields: [driverId], references: [id])
+  carId         Int
+  car           Car      @relation(fields: [carId], references: [id])
   startLocation String
   endLocation   String
   startTime     DateTime

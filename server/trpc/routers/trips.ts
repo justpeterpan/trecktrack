@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { publicProcedure, router } from '~/server/trpc/trpc'
 
 const TripShape = z.object({
+  carId: z.number(),
   description: z.string(),
   distance: z.number(),
   duration: z.number(),
@@ -28,6 +29,7 @@ export default router({
         startTime: input.startTime,
         endTime: input.endTime,
         driverId: input.driverId,
+        carId: input.carId,
       },
     })
   }),

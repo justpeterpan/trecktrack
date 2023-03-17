@@ -1,16 +1,38 @@
 <script setup lang="ts">
 import { getFormattedTrip } from '~/composables/trips'
-import { TripRequired } from '~/types/trip'
+import { TripRequired } from '~~/types/types.js'
 
 const { $trpc } = useNuxtApp()
 const router = useRouter()
-const selectOptions = ref({})
+const driverSelectOptions = ref({})
+const carSelectOptions = ref({})
 
 const { data: drivers } = await $trpc.drivers.getAll.useQuery()
-selectOptions.value = getDriversForSelect(drivers.value)
+const { data: cars } = await $trpc.cars.getAll.useQuery()
+driverSelectOptions.value = getDriversForSelect(drivers.value)
+carSelectOptions.value = getCarsForSelect(cars.value)
 
 async function createTrip(trip: TripRequired) {
   const formattedTrip = getFormattedTrip(trip)
+  const distance = calculateDistance(
+    formattedTrip.startMileage,
+    formattedTrip.endMileage
+  )
+
+  const { data: car } = await $trpc.cars.get.useQuery({
+    id: +formattedTrip.carId,
+  })
+
+  const newCurrentMileage = await getCalculatedCurrentMileage(
+    distance,
+    car.value?.currentMileage || 0
+  )
+
+  await $trpc.cars.updateMileage.mutate({
+    id: +trip.carId,
+    currentMileage: newCurrentMileage,
+    updatedAt: new Date(),
+  })
   await $trpc.trips.create.mutate(formattedTrip)
   router.push('/')
 }
@@ -31,7 +53,13 @@ async function createTrip(trip: TripRequired) {
             type="select"
             label="Who was driving"
             name="driverId"
-            :options="selectOptions"
+            :options="driverSelectOptions"
+          />
+          <FormKit
+            type="select"
+            label="Driving what?"
+            name="carId"
+            :options="carSelectOptions"
           />
           <FormKit
             type="text"

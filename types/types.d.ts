@@ -1,4 +1,4 @@
-import { Trip } from '@prisma/client'
+import { Car, Trip } from '@prisma/client'
 
 interface TripOptional {
   id: number

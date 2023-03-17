@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon, SunIcon } from '@heroicons/vue/24/outline'
 const navigation = [
   { name: 'Drivers', path: '/driver' },
   { name: 'Trips', path: '/trip' },
+  { name: 'Cars', path: '/car' },
 ]
 const mobileMenuOpen = ref(false)
 </script>

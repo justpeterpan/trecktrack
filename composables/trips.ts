@@ -1,5 +1,5 @@
 import { Driver } from '@prisma/client'
-import { TripRequired } from '~/types/trip'
+import { TripRequired } from '~/types/types'
 
 export const getDriversForSelect = (drivers: Driver[] | null) => {
   if (!!drivers?.length) {
@@ -28,6 +28,7 @@ export const getFormattedTrip = (trip: TripRequired) => {
   return {
     ...trip,
     driverId: +trip.driverId,
+    carId: +trip.carId,
     startTime: new Date(trip.startTime).toISOString(),
     endTime: new Date(trip.endTime).toISOString(),
     startMileage: +trip.startMileage,
