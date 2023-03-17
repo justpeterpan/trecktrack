@@ -10,22 +10,35 @@ const { data: drivers, pending: driversPending } =
     <Hero title="Drivers" />
     <Content title="Drivers">
       <template #left v-if="!driversPending && drivers?.length">
-        <ul class="pb-4">
-          <li
-            v-for="driver in drivers"
-            :key="driver.id"
-            class="last:border-b border-black border-dotted last:pb-4"
+        <div class="mt-6 flow-root">
+          <ul role="list" class="-my-5 divide-y divide-gray-200">
+            <li v-for="driver in drivers" :key="driver.id" class="py-4">
+              <DriverRow
+                :driverName="driver.name"
+                :tripCount="driver.Trip.length"
+                :driver-id="driver.id"
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="mt-6">
+          <NuxtLink
+            to="/driver/create"
+            class="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+            >Create Driver</NuxtLink
           >
-            <NuxtLink :to="`/driver/${driver.id}`"> {{ driver.name }}</NuxtLink>
-          </li>
-        </ul>
-        <NuxtLink
-          to="/driver/create"
-          class="border-dashed border-b border-orange-400"
-          >Create Driver</NuxtLink
-        >
+        </div>
       </template>
-      <template #left v-else>No Drivers available</template>
+      <template #left v-else>
+        <p>No Drivers available</p>
+        <div class="mt-6">
+          <NuxtLink
+            to="/driver/create"
+            class="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+            >Create Driver</NuxtLink
+          >
+        </div>
+      </template>
     </Content>
   </div>
 </template>
