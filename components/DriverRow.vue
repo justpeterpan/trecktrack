@@ -9,7 +9,7 @@ const props = defineProps<{
   <div class="flex items-center space-x-4">
     <div class="flex-shrink-0">
       <img
-        class="h-8 w-8 rounded-full"
+        class="h-8 w-8 rounded-full bg-indigo-400"
         src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e5358e38e249322cc0675e2_peep-62.png"
         alt=""
       />
