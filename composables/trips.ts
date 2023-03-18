@@ -1,4 +1,4 @@
-import { Driver } from '@prisma/client'
+import { Driver, Trip } from '@prisma/client'
 import { TripRequired } from '~/types/types'
 
 export const getDriversForSelect = (drivers: Driver[] | null) => {
@@ -39,4 +39,8 @@ export const getFormattedTrip = (trip: TripRequired) => {
       new Date(trip.endTime)
     ),
   }
+}
+
+export function sortTripsByDateDescending(trips: Trip[]) {
+  return trips.sort((a: any, b: any) => a.startTime - b.startTime)
 }

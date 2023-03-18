@@ -10,10 +10,12 @@ specifiers:
   '@prisma/client': ^4.11.0
   '@trpc/client': ^10.16.0
   '@trpc/server': ^10.16.0
+  chart.js: ^4.2.1
   nuxt: ^3.3.1
   prisma: ^4.11.0
   superjson: ^1.12.2
   trpc-nuxt: ^0.7.0
+  vue-chartjs: ^5.2.0
   zod: ^3.21.4
 
 dependencies:
@@ -25,8 +27,10 @@ dependencies:
   '@prisma/client': 4.11.0_prisma@4.11.0
   '@trpc/client': 10.16.0_@trpc+server@10.16.0
   '@trpc/server': 10.16.0
+  chart.js: 4.2.1
   superjson: 1.12.2
   trpc-nuxt: 0.7.0_bs2m6f7vkkkyoagrp5uzoldyt4
+  vue-chartjs: 5.2.0_chart.js@4.2.1
   zod: 3.21.4
 
 devDependencies:
@@ -1297,6 +1301,10 @@ packages:
       - supports-color
     dev: true
 
+  /@kurkle/color/0.3.2:
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+    dev: false
+
   /@mapbox/node-pre-gyp/1.0.10:
     resolution: {integrity: sha512-4ySo4CjzStuprMwk35H5pPbkymjv1SF3jGLj6rAHp/xT/RF7TL7bd9CTm1xDY49K2qF7jmR/g7k+SkLETP6opA==}
     hasBin: true
@@ -2413,6 +2421,13 @@ packages:
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
+
+  /chart.js/4.2.1:
+    resolution: {integrity: sha512-6YbpQ0nt3NovAgOzbkSSeeAQu/3za1319dPUQTXn9WcOpywM8rGKxJHrhS8V8xEkAlk8YhEfjbuAPfUyp6jIsw==}
+    engines: {pnpm: ^7.0.0}
+    dependencies:
+      '@kurkle/color': 0.3.2
+    dev: false
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
@@ -6317,6 +6332,15 @@ packages:
     dependencies:
       ufo: 1.1.1
     dev: true
+
+  /vue-chartjs/5.2.0_chart.js@4.2.1:
+    resolution: {integrity: sha512-d3zpKmGZr2OWHQ1xmxBcAn5ShTG917+/UCLaSpaCDDqT0U7DBsvFzTs69ZnHCgKoXT55GZDW8YEj9Av+dlONLA==}
+    peerDependencies:
+      chart.js: ^4.1.1
+      vue: ^3.0.0-0 || ^2.7.0
+    dependencies:
+      chart.js: 4.2.1
+    dev: false
 
   /vue-devtools-stub/0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
