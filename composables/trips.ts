@@ -11,6 +11,34 @@ export const getDriversForSelect = (drivers: Driver[] | null) => {
   return {}
 }
 
+export function useConvertedMillisecondsToTime(milliseconds: number) {
+  const hours = Math.floor(milliseconds / (1000 * 60 * 60))
+  const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000)
+
+  let result = ''
+
+  if (hours > 0) {
+    result += `${hours} hour${hours > 1 ? 's' : ''}`
+  }
+
+  if (minutes > 0) {
+    if (result) {
+      result += ', '
+    }
+    result += `${minutes} minute${minutes > 1 ? 's' : ''}`
+  }
+
+  if (seconds > 0) {
+    if (result) {
+      result += ', '
+    }
+    result += `${seconds} second${seconds > 1 ? 's' : ''}`
+  }
+
+  return result
+}
+
 export const calculateDuration = (start: Date, end: Date) => {
   return end.getTime() - start.getTime()
 }
@@ -21,18 +49,24 @@ export const calculateDistance = (
 ) => {
   if (typeof startMileage === 'string') startMileage = parseFloat(startMileage)
   if (typeof endMileage === 'string') endMileage = parseFloat(endMileage)
-  return endMileage - startMileage
+  return Number((endMileage - startMileage).toFixed(2))
 }
 
-export const getFormattedTrip = (trip: TripRequired) => {
+export const useFormattedTrip = (trip: TripRequired) => {
   return {
     ...trip,
     driverId: +trip.driverId,
     carId: +trip.carId,
     startTime: new Date(trip.startTime).toISOString(),
     endTime: new Date(trip.endTime).toISOString(),
-    startMileage: +trip.startMileage,
-    endMileage: +trip.endMileage,
+    startMileage:
+      typeof trip.startMileage === 'string'
+        ? parseFloat(trip.startMileage)
+        : trip.endMileage,
+    endMileage:
+      typeof trip.endMileage === 'string'
+        ? parseFloat(trip.endMileage)
+        : trip.endMileage,
     distance: calculateDistance(trip.startMileage, trip.endMileage),
     duration: calculateDuration(
       new Date(trip.startTime),
@@ -41,6 +75,6 @@ export const getFormattedTrip = (trip: TripRequired) => {
   }
 }
 
-export function sortTripsByDateDescending(trips: Trip[]) {
+export function useSortedTripsByDateDescending(trips: Trip[]): Trip[] {
   return trips.sort((a: any, b: any) => a.startTime - b.startTime)
 }

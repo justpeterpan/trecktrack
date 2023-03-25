@@ -13,24 +13,22 @@ async function createDriver(driver: Driver) {
 <template>
   <div>
     <Hero title="Create Driver" />
-    <Content title="Latest Trips">
-      <template #left>
+    <Content>
+      <FormKit
+        type="form"
+        id="driver"
+        submit-label="Create Driver"
+        @submit="createDriver"
+      >
         <FormKit
-          type="form"
-          id="driver"
-          submit-label="Create Driver"
-          @submit="createDriver"
-        >
-          <FormKit
-            type="text"
-            name="name"
-            label="Your name"
-            placeholder="Jane Doe"
-            help="What do people call you?"
-            validation="required"
-          />
-        </FormKit>
-      </template>
+          type="text"
+          name="name"
+          label="Your name"
+          placeholder="Jane Doe"
+          help="What do people call you?"
+          validation="required"
+        />
+      </FormKit>
     </Content>
   </div>
 </template>

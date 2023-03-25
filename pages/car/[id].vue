@@ -20,11 +20,7 @@ const { data: car, pending } = await $trpc.cars.get.useQuery({
   id: +route.params.id,
 })
 const { data: drivers } = await $trpc.drivers.getAll.useQuery()
-const sortedTrips = sortTripsByDateDescending(car.value?.Trip || [])
-
-function mapDriver(id: number) {
-  return drivers.value?.find((driver: Driver) => driver.id === id)
-}
+const sortedTrips = useSortedTripsByDateDescending(car.value?.Trip || [])
 
 function getChartData() {
   const driversWithTrips = drivers.value?.filter((driver: Driver) =>
@@ -67,24 +63,23 @@ const chartOptions: ChartOptions = {
   <div>
     <Hero v-if="!pending && car?.id" :title="car?.name" />
     <Content title="Latest Trips" v-if="!pending && car?.id">
-      <template #left>
-        <div v-if="car?.id" class="border-b border-gray-200 pb-4 mb-4">
-          starting: {{ car.startingMileage }} km, current:
-          {{ car.currentMileage }} km -
-          {{ car.currentMileage - car.startingMileage }} km traveled since
-          {{ car.createdAt.toLocaleDateString() }}
-        </div>
-        <Bar :data="chartData" :options="chartOptions" />
-        <ul v-if="car.Trip.length">
-          <li v-for="trip in sortedTrips" :key="trip.id">
-            {{ trip.startTime.toLocaleDateString() }} - {{ trip.distance }} km -
-            {{ trip.duration / 3_600_000 }} h | from:
-            {{ trip.startLocation }} to: {{ trip.endLocation }} |
-            {{ mapDriver(trip.driverId)?.name }}
-          </li>
-        </ul>
-        <p v-else>no trips yet</p>
-      </template>
+      <div v-if="car?.id" class="border-b border-gray-200 pb-4 mb-4">
+        starting: {{ car.startingMileage }} km, current:
+        {{ car.currentMileage }} km -
+        {{ Number((car.currentMileage - car.startingMileage).toFixed(2)) }} km
+        traveled since
+        {{ car.createdAt.toLocaleDateString() }}
+      </div>
+      <Bar v-if="car.Trip.length" :data="chartData" :options="chartOptions" />
+      <ul v-if="car.Trip.length">
+        <li v-for="trip in sortedTrips" :key="trip.id">
+          {{ trip.startTime.toLocaleDateString() }} - {{ trip.distance }} km -
+          {{ useConvertedMillisecondsToTime(trip.duration) }} | from:
+          {{ trip.startLocation }} to: {{ trip.endLocation }} | Driver:
+          {{ useMapDriver(drivers, trip.driverId)?.name }}
+        </li>
+      </ul>
+      <p v-else>no trips yet</p>
     </Content>
   </div>
 </template>

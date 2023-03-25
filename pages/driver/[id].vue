@@ -18,7 +18,7 @@ const route = useRoute()
 const { data: driver, pending } = await $trpc.drivers.get.useQuery({
   id: +route.params.id,
 })
-const sortedTrips = sortTripsByDateDescending(driver.value?.Trip || [])
+const sortedTrips = useSortedTripsByDateDescending(driver.value?.Trip || [])
 
 function getChartData() {
   const tripsByMonth =
@@ -69,15 +69,13 @@ function getChartData() {
   <div>
     <Hero v-if="!pending && driver?.id" :title="driver?.name" />
     <Content title="Latest Trips" v-if="!pending && driver?.id">
-      <template #left>
-        <Bar :data="getChartData()" />
-        <ul v-if="driver.Trip.length" cl>
-          <li v-for="trip in sortedTrips" :key="trip.id">
-            {{ trip.startTime }} {{ trip.description }}
-          </li>
-        </ul>
-        <p v-else>no trips taken yet</p>
-      </template>
+      <Bar v-if="driver.Trip.length" :data="getChartData()" />
+      <ul v-if="driver.Trip.length">
+        <li v-for="trip in sortedTrips" :key="trip.id">
+          {{ trip.startTime }} {{ trip.description }}
+        </li>
+      </ul>
+      <p v-else>no trips taken yet</p>
     </Content>
   </div>
 </template>

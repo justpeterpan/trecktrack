@@ -19,9 +19,9 @@ export const getCarsForSelect = (cars: Car[] | null) => {
   return {}
 }
 
-export const getCalculatedCurrentMileage = async (
+export const useCalculatedCurrentMileage = async (
   distance: number,
   currentMileage: number
 ) => {
-  return distance + currentMileage
+  return Number((distance + currentMileage).toFixed(2))
 }
