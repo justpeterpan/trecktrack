@@ -8,6 +8,7 @@ const carSelectOptions = ref({})
 
 const { data: drivers } = await $trpc.drivers.getAll.useQuery()
 const { data: cars } = await $trpc.cars.getAll.useQuery()
+let selectedCar = ref(cars.value?.[0])
 driverSelectOptions.value = getDriversForSelect(drivers.value)
 carSelectOptions.value = getCarsForSelect(cars.value)
 
@@ -54,6 +55,7 @@ async function createTrip(trip: TripRequired) {
           type="select"
           label="Driving what?"
           name="carId"
+          v-model="selectedCar"
           :options="carSelectOptions"
         />
         <FormKit
@@ -95,6 +97,7 @@ async function createTrip(trip: TripRequired) {
           placeholder="Start Mileage"
           help="How many km did you start with?"
           validation="required"
+          :value="selectedCar?.currentMileage"
         />
         <FormKit
           type="text"

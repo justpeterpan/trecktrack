@@ -5,6 +5,7 @@ const props = defineProps<{
   carId: number
 }>()
 </script>
+
 <template>
   <div class="flex items-center space-x-4">
     <div class="flex-shrink-0">

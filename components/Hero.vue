@@ -6,7 +6,7 @@ const props = defineProps<{
 
 <template>
   <header class="py-10 px-5">
-    <h1 class="text-3xl font-bold tracking-tight text-white">
+    <h1 class="text-3xl font-bold tracking-tight">
       {{ props.title }}
     </h1>
   </header>

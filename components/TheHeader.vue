@@ -11,13 +11,13 @@ const mobileMenuOpen = ref(false)
 </script>
 
 <template>
-  <header class="bg-gray-800 pb-44">
+  <header class="pb-44 text-gray-800">
     <nav
-      class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 border-b border-gray-700"
+      class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       aria-label="Global"
     >
       <div class="flex lg:flex-1 px-5">
-        <NuxtLink to="/" class="text-white -m-1.5 p-1.5">
+        <NuxtLink to="/" class="-m-1.5 p-1.5">
           TrekTrack
           <span class="sr-only">Your Company</span>
         </NuxtLink>
@@ -25,7 +25,7 @@ const mobileMenuOpen = ref(false)
       <div class="flex lg:hidden">
         <button
           type="button"
-          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
+          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
           @click="mobileMenuOpen = true"
         >
           <span class="sr-only">Open main menu</span>
@@ -37,12 +37,12 @@ const mobileMenuOpen = ref(false)
           v-for="item in navigation"
           :key="item.name"
           :href="item.path"
-          class="text-sm font-semibold leading-6 text-white"
+          class="text-sm font-semibold leading-6"
           >{{ item.name }}</a
         >
       </div>
       <div class="hidden px-5 lg:flex lg:flex-1 lg:justify-end">
-        <SunIcon class="h-6 w-6 text-white" aria-hidden="true" />
+        <SunIcon class="h-6 w-6" aria-hidden="true" />
       </div>
     </nav>
     <ClientOnly>
