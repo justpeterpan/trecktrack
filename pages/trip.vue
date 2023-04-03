@@ -13,9 +13,7 @@ driverSelectOptions.value = getDriversForSelect(drivers.value)
 carSelectOptions.value = getCarsForSelect(cars.value)
 
 async function createTrip(trip: TripRequired) {
-  console.log('trip', trip)
   const formattedTrip = useFormattedTrip(trip)
-  console.log('formatted trip', formattedTrip)
   const distance = calculateDistance(
     formattedTrip.startMileage,
     formattedTrip.endMileage
@@ -27,8 +25,6 @@ async function createTrip(trip: TripRequired) {
     distance,
     car.value?.currentMileage || 0
   )
-  console.log('fetched car', car.value?.id)
-  console.log('car trip id', trip.carId)
   const currentCarId =
     typeof trip.carId === 'number' ? trip.carId : trip.carId.id
   await $trpc.cars.updateMileage.mutate({
