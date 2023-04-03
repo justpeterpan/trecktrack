@@ -53,10 +53,12 @@ export const calculateDistance = (
 }
 
 export const useFormattedTrip = (trip: TripRequired) => {
+  const currentCarId =
+    typeof trip.carId === 'number' ? trip.carId : trip.carId.id
   return {
     ...trip,
     driverId: +trip.driverId,
-    carId: +trip.carId,
+    carId: currentCarId,
     startTime: new Date(trip.startTime).toISOString(),
     endTime: new Date(trip.endTime).toISOString(),
     startMileage:

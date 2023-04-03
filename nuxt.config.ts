@@ -1,5 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-
 export default defineNuxtConfig({
   modules: ['@formkit/nuxt', '@nuxtjs/tailwindcss'],
   build: {
@@ -8,7 +6,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       bodyAttrs: {
-        class: 'h-full bg-gray-100',
+        class: 'h-full bg-white',
       },
     },
   },

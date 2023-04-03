@@ -8,22 +8,22 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.6.0",
-    "nuxt": "^3.3.1",
-    "prisma": "^4.11.0"
+    "@nuxtjs/tailwindcss": "^6.6.5",
+    "nuxt": "^3.3.2",
+    "prisma": "^4.12.0"
   },
   "dependencies": {
-    "@formkit/icons": "1.0.0-beta.15",
-    "@formkit/nuxt": "1.0.0-beta.15",
-    "@formkit/themes": "1.0.0-beta.15",
+    "@formkit/icons": "0.16.4",
+    "@formkit/nuxt": "0.16.4",
+    "@formkit/themes": "0.16.4",
     "@headlessui/vue": "^1.7.12",
     "@heroicons/vue": "^2.0.16",
-    "@prisma/client": "^4.11.0",
-    "@trpc/client": "^10.16.0",
-    "@trpc/server": "^10.16.0",
+    "@prisma/client": "^4.12.0",
+    "@trpc/client": "^10.18.0",
+    "@trpc/server": "^10.18.0",
     "chart.js": "^4.2.1",
     "superjson": "^1.12.2",
-    "trpc-nuxt": "^0.7.0",
+    "trpc-nuxt": "^0.8.0",
     "vue-chartjs": "^5.2.0",
     "zod": "^3.21.4"
   }

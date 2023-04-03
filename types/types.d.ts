@@ -8,6 +8,7 @@ interface TripOptional {
 interface TripOverWritten extends Trip {
   startTime: Date | string
   endTime: Date | string
+  carId: Car | number
 }
 
 type TripRequired = Omit<TripOverWritten, keyof TripOptional>
