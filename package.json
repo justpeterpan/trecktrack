@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.6.5",
-    "nuxt": "^3.3.2",
+    "nuxt": "^3.3.3",
     "prisma": "^4.12.0"
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "@formkit/nuxt": "0.16.4",
     "@formkit/themes": "0.16.4",
     "@headlessui/vue": "^1.7.12",
-    "@heroicons/vue": "^2.0.16",
+    "@heroicons/vue": "^2.0.17",
     "@prisma/client": "^4.12.0",
     "@trpc/client": "^10.18.0",
     "@trpc/server": "^10.18.0",
